@@ -3,24 +3,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
-
-    <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.wst.acocscanner.login.LoginFragment"
-        android:label="Login"
-        tools:layout="@layout/fragment_login">
-        <action
-            android:id="@+id/action_loginFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
-    </fragment>
+    app:startDestination="@id/homeFragment">
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.wst.acocscanner.home.HomeFragment"
         android:label="Home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment"
+            app:enterAnim="@anim/animate_fade_enter"
+            app:exitAnim="@anim/animate_fade_exit"
+            app:popEnterAnim="@anim/animate_in_out_enter"
+            app:popExitAnim="@anim/animate_in_out_exit"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="com.wst.acocscanner.registration.RegistrationFragment"
+        android:label="Registration"
+        tools:layout="@layout/fragment_registration">
         <argument
-            android:name="userName"
+            android:name="id"
             app:argType="string" />
+        <action
+            android:id="@+id/action_registrationFragment_to_cadetDetailsFragment"
+            app:destination="@id/cadetDetailsFragment"
+            app:enterAnim="@anim/animate_fade_enter"
+            app:exitAnim="@anim/animate_fade_exit" />
+        <action
+            android:id="@+id/action_registrationFragment_to_homeFragment"
+            app:popUpTo="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cadetDetailsFragment"
+        android:name="com.wst.acocscanner.cadetDetails.CadetDetailsFragment"
+        tools:layout="@layout/fragment_cadet_details"
+        android:label="Cadet Details" >
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_cadetDetailsFragment_to_registrationFragment"
+            app:popUpTo="@id/registrationFragment" />
     </fragment>
 </navigation>

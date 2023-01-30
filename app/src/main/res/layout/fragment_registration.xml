@@ -10,69 +10,71 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintEnd_toEndOf="@+id/oe_home_btn"
-        app:layout_constraintStart_toEndOf="@+id/oe_home_btn"
-        tools:context=".home.HomeFragment">
-
+        tools:context=".registration.RegistrationFragment">
 
         <TextView
-            android:id="@+id/title_3"
+            android:id="@+id/title_4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="65dp"
-            android:layout_marginBottom="164dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="11dp"
             android:gravity="center"
-            android:text="Home"
+            android:text="Registration"
             android:textColor="@color/textAsh"
             android:textSize="36dp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/reg_home_btn"
+            app:layout_constraintBottom_toTopOf="@+id/scanner_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <com.budiyev.android.codescanner.CodeScannerView
+            android:id="@+id/scanner_view"
+            android:layout_width="0dp"
+            android:layout_height="500dp"
+            android:layout_marginBottom="8dp"
+            app:autoFocusButtonColor="@color/white"
+            app:autoFocusButtonVisible="true"
+            app:frameAspectRatioHeight="1"
+            app:frameAspectRatioWidth="1"
+            app:frameColor="@color/white"
+            app:frameCornersRadius="0dp"
+            app:frameCornersSize="50dp"
+            app:frameSize=".75"
+            app:frameThickness="2dp"
+            app:layout_constraintBottom_toTopOf="@+id/reg_back_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_4"
+            app:maskColor="#77000000" />
+
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/reg_home_btn"
+            android:id="@+id/reg_back_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="1dp"
             android:layout_marginBottom="23dp"
             android:background="@drawable/custom_button"
             android:paddingStart="30dp"
             android:paddingEnd="30dp"
-            android:text="Registration"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            app:layout_constraintBottom_toTopOf="@+id/oe_home_btn"
-            app:layout_constraintEnd_toEndOf="@+id/oe_home_btn"
-            app:layout_constraintTop_toBottomOf="@+id/title_3" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/oe_home_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="124dp"
-            android:background="@drawable/custom_button"
-            android:paddingStart="30dp"
-            android:paddingEnd="30dp"
-            android:text="Other Events"
+            android:text="Back"
             android:textColor="@color/white"
             android:textSize="20dp"
             app:layout_constraintBottom_toTopOf="@+id/imageView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/reg_home_btn" />
+            app:layout_constraintTop_toBottomOf="@+id/scanner_view" />
 
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="80dp"
-            android:layout_height="60dp"
+            android:layout_height="30dp"
             android:layout_gravity="center"
-            android:layout_marginBottom="1dp"
+            android:layout_marginBottom="16dp"
             android:src="@drawable/logo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/oe_home_btn" />
+            app:layout_constraintTop_toBottomOf="@+id/reg_back_btn" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -7,33 +7,118 @@
 
     </data>
 
-    <androidx.drawerlayout.widget.DrawerLayout
-        android:id="@+id/drawerLayout"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/passwordInput_et"
+        app:layout_constraintTop_toTopOf="@+id/passwordInput_et"
         tools:context=".MainActivity">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <fragment
-                android:id="@+id/nav_host_fragment"
-                android:name="androidx.navigation.fragment.NavHostFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:defaultNavHost="true"
-                app:navGraph="@navigation/nav_graph" />
-        </LinearLayout>
-        <com.google.android.material.navigation.NavigationView
+        <TextView
+            android:id="@+id/title_1"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:id="@+id/navView"
-            android:layout_gravity="start"
-            app:menu="@menu/navdrawer_menu"
-            app:headerLayout="@layout/nav_header"
-            />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="80dp"
+            android:gravity="center"
+            android:text="ACOC Reunion"
+            android:textColor="@color/textAsh"
+            android:textSize="36dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/title_2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/title_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="39dp"
 
-    </androidx.drawerlayout.widget.DrawerLayout>
+            android:gravity="center"
+            android:text="Login"
+            android:textColor="@color/textAsh"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/userName_et"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_1" />
+
+        <EditText
+            android:id="@+id/userName_et"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="264dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="287dp"
+            android:background="@drawable/custom_inputbox"
+            android:drawableStart="@drawable/custom_user_icon"
+            android:drawablePadding="12dp"
+            android:ems="10"
+            android:hint="User Name"
+            android:paddingStart="12dp"
+            android:textColor="@color/textAsh"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/passwordInput_et"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/custom_inputbox"
+            android:drawableStart="@drawable/custom_password_icon"
+            android:drawablePadding="12dp"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:paddingStart="12dp"
+            android:textColor="@color/textAsh"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/login_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/userName_et" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/login_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="142dp"
+            android:background="@drawable/custom_button"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
+            android:text="login"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/passwordInput_et" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="80dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/logo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/userName_et" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

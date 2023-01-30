@@ -1,5 +1,6 @@
 package com.wst.acocscanner
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -14,29 +15,19 @@ import com.wst.acocscanner.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-        drawerLayout = binding.drawerLayout
+        val actionBar = supportActionBar
+        actionBar?.hide()
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-
-        val navController = this.findNavController(R.id.nav_host_fragment)
-        NavigationUI.setupActionBarWithNavController(this, navController,drawerLayout)
-
-        navController.addOnDestinationChangedListener { nc: NavController, nd: NavDestination, _: Bundle? ->
-            if (nd.id == nc.graph.startDestinationId) {
-                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-            } else {
-                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-            }
+        binding.loginBtn.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+            finish()
         }
-        NavigationUI.setupWithNavController(binding.navView,navController)
-    }
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = this.findNavController(R.id.nav_host_fragment)
-        return NavigationUI.navigateUp(navController,drawerLayout)
     }
 
 }
