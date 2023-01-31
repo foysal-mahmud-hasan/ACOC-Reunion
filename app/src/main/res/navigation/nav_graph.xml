@@ -17,6 +17,11 @@
             app:popEnterAnim="@anim/animate_in_out_enter"
             app:popExitAnim="@anim/animate_in_out_exit"
             app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_homeFragment_to_otherEventsFragment"
+            app:destination="@id/otherEventsFragment"
+            app:enterAnim="@anim/animate_card_enter"
+            app:exitAnim="@anim/animate_card_exit" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
@@ -46,5 +51,14 @@
         <action
             android:id="@+id/action_cadetDetailsFragment_to_registrationFragment"
             app:popUpTo="@id/registrationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/otherEventsFragment"
+        android:name="com.wst.acocscanner.otherEvents.OtherEventsFragment"
+        android:label="OtherEventsFragment"
+        tools:layout="@layout/fragment_other_events">
+        <action
+            android:id="@+id/action_otherEventsFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

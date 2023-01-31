@@ -116,4 +116,7 @@ dependencies {
 
     //coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1'
+
+    //loading animation
+    implementation 'com.airbnb.android:lottie:3.4.0'
 }

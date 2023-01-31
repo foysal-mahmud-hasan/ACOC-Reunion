@@ -39,9 +39,9 @@ class HomeFragment : Fragment() {
         binding.regHomeBtn.setOnClickListener {view: View ->
             view.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToRegistrationFragment("asd"))
         }
-
-
-
+        binding.oeHomeBtn.setOnClickListener {view: View ->
+            view.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToOtherEventsFragment())
+        }
         return binding.root
     }
 }
