@@ -1,5 +1,6 @@
 package com.wst.acocscanner
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,7 +8,6 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
@@ -44,7 +44,6 @@ class MainActivity : AppCompatActivity() {
 
             //login User
             val userName = binding.userNameEt.text.toString()
-            Log.d("TAG", "$userName")
             val password = binding.passwordInputEt.text.toString()
             loginUser(userName, password)
 
@@ -67,12 +66,19 @@ class MainActivity : AppCompatActivity() {
                     if (response.body()!!.error){
                         Toast.makeText(this@MainActivity, response.body()!!.error_msg,
                             Toast.LENGTH_LONG).show()
+                        binding.contentLayout.visibility = View.VISIBLE
                     } else{
-                        var userId = response.body()!!.id
-                        val intent = Intent(this@MainActivity, HomeActivity::class.java)
-                        intent.putExtra("userId", userId)
-                        startActivity(intent)
-                        finish()
+//                        val intent = Intent(this@MainActivity, HomeActivity::class.java)
+
+                        //saving id to shared prefs
+//                        val sharedPref = this@MainActivity.getSharedPreferences("com.wst.acocscanner", Context.MODE_PRIVATE)
+//                        val editor = sharedPref.edit()
+//                        editor.putInt("Id", response.body()!!.user!!.Id)
+//                        editor.commit()
+//                        val token = sharedPref.getInt("Id", 0)
+//                        Log.d("token", "$token")
+
+                        onSuccessLogin(response)
 //                        Toast.makeText(this@MainActivity, "Register Successful"
 //                                + response.body()!!.uid, Toast.LENGTH_LONG).show()
                     }
@@ -80,10 +86,23 @@ class MainActivity : AppCompatActivity() {
                 override fun onFailure(call: Call<APIResponse>, t: Throwable) {
                     loadingAnimation.visibility = View.GONE
                     loadingAnimation.cancelAnimation()
+                    binding.contentLayout.visibility = View.VISIBLE
                     Toast.makeText(this@MainActivity, t.message, Toast.LENGTH_LONG).show()
                 }
             })
 
+    }
+
+    private fun onSuccessLogin(response: Response<APIResponse>) {
+        val sharedPref = getSharedPreferences("com.wst.acocscanner", MODE_PRIVATE)
+        val editor = sharedPref.edit()
+        editor.putLong("login_time", System.currentTimeMillis())
+        editor.putInt("Id", response.body()!!.user!!.Id)
+        editor.apply()
+
+        val intent = Intent(this@MainActivity, HomeActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
 }

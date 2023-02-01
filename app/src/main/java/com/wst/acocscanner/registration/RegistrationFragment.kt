@@ -37,7 +37,7 @@ class RegistrationFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_registration, container, false)
 
         binding.regBackBtn.setOnClickListener {view: View ->
-            view.findNavController().navigate(RegistrationFragmentDirections.actionRegistrationFragmentToCadetDetailsFragment("asd"))
+            view.findNavController().navigate(RegistrationFragmentDirections.actionRegistrationFragmentToCadetDetailsFragment())
         }
 
 

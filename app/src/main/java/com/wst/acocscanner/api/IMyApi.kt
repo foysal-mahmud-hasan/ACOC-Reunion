@@ -12,6 +12,6 @@ interface IMyApi {
 
     @FormUrlEncoded
     @POST("login.php")
-    fun loginUser(@Field("UserName") userName : String, @Field("Password") password : String) : Call<APIResponse>
+    fun loginUser(@Field("userName") userName : String, @Field("password") password : String) : Call<APIResponse>
 
 }

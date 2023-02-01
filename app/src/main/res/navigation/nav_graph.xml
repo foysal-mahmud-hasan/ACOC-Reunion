@@ -28,9 +28,6 @@
         android:name="com.wst.acocscanner.registration.RegistrationFragment"
         android:label="Registration"
         tools:layout="@layout/fragment_registration">
-        <argument
-            android:name="id"
-            app:argType="string" />
         <action
             android:id="@+id/action_registrationFragment_to_cadetDetailsFragment"
             app:destination="@id/cadetDetailsFragment"
@@ -45,9 +42,6 @@
         android:name="com.wst.acocscanner.cadetDetails.CadetDetailsFragment"
         tools:layout="@layout/fragment_cadet_details"
         android:label="Cadet Details" >
-        <argument
-            android:name="id"
-            app:argType="string" />
         <action
             android:id="@+id/action_cadetDetailsFragment_to_registrationFragment"
             app:popUpTo="@id/registrationFragment" />
