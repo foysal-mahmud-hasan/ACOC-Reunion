@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity() {
         val sharedPref = getSharedPreferences("com.wst.acocscanner", MODE_PRIVATE)
         val editor = sharedPref.edit()
         editor.putLong("login_time", System.currentTimeMillis())
-        editor.putInt("Id", response.body()!!.user!!.Id)
+        editor.putInt("Id", response.body()!!.user!!.id)
         editor.apply()
 
         val intent = Intent(this@MainActivity, HomeActivity::class.java)
