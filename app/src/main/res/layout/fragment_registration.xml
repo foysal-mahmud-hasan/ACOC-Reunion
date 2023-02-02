@@ -4,77 +4,109 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="registrationViewModel"
+            type="com.wst.acocscanner.registration.RegistrationViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".registration.RegistrationFragment">
-
-        <TextView
-            android:id="@+id/title_4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="11dp"
-            android:gravity="center"
-            android:text="Registration"
-            android:textColor="@color/textAsh"
-            android:textSize="36dp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/scanner_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.budiyev.android.codescanner.CodeScannerView
-            android:id="@+id/scanner_view"
-            android:layout_width="0dp"
-            android:layout_height="500dp"
-            android:layout_marginBottom="8dp"
-            app:autoFocusButtonColor="@color/white"
-            app:autoFocusButtonVisible="true"
-            app:frameAspectRatioHeight="1"
-            app:frameAspectRatioWidth="1"
-            app:frameColor="@color/white"
-            app:frameCornersRadius="0dp"
-            app:frameCornersSize="50dp"
-            app:frameSize=".75"
-            app:frameThickness="2dp"
-            app:layout_constraintBottom_toTopOf="@+id/reg_back_btn"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title_4"
-            app:maskColor="#77000000" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/reg_back_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="23dp"
-            android:background="@drawable/custom_button"
-            android:paddingStart="30dp"
-            android:paddingEnd="30dp"
-            android:text="Back"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            app:layout_constraintBottom_toTopOf="@+id/imageView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/scanner_view" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="80dp"
-            android:layout_height="30dp"
+        android:background="@color/white">
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/loading_animation"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_gravity="center"
-            android:layout_marginBottom="16dp"
-            android:src="@drawable/logo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/reg_back_btn" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/loading"
+            android:visibility="gone"
+            />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/contentLayout">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".registration.RegistrationFragment">
+
+                <TextView
+                    android:id="@+id/title_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="11dp"
+                    android:gravity="center"
+                    android:text="Registration"
+                    android:textColor="@color/textAsh"
+                    android:textSize="36dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/scanner_view"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.budiyev.android.codescanner.CodeScannerView
+                    android:id="@+id/scanner_view"
+                    android:layout_width="0dp"
+                    android:layout_height="500dp"
+                    android:layout_marginBottom="8dp"
+                    app:autoFocusButtonColor="@color/white"
+                    app:autoFocusButtonVisible="true"
+                    app:frameAspectRatioHeight="1"
+                    app:frameAspectRatioWidth="1"
+                    app:frameColor="@color/white"
+                    app:frameCornersRadius="0dp"
+                    app:frameCornersSize="50dp"
+                    app:frameSize=".75"
+                    app:frameThickness="2dp"
+                    app:layout_constraintBottom_toTopOf="@+id/reg_scan_btn"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/title_4"
+                    app:maskColor="#77000000" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/reg_scan_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="23dp"
+                    android:background="@drawable/custom_button"
+                    android:paddingStart="30dp"
+                    android:paddingEnd="30dp"
+                    android:onClick="@{() -> registrationViewModel.backButtonPressed()}"
+                    android:text="Back"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    app:layout_constraintBottom_toTopOf="@+id/imageView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/scanner_view" />
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="80dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="16dp"
+                    android:src="@drawable/logo"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/reg_scan_btn" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </FrameLayout>
+    </FrameLayout>
+
+
+
 </layout>

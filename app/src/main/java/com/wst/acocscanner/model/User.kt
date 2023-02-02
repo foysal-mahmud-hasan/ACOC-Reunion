@@ -2,6 +2,6 @@ package com.wst.acocscanner.model
 
 class User {
 
-    var Id : Int = 0
+    var id : Int = 0
 
 }
