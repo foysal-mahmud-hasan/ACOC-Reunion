@@ -26,18 +26,22 @@ interface IMyApi {
     // check barcode register
     @FormUrlEncoded
     @POST("check_coupon.php")
-    fun checkCoupon(@Field("barcode") barcode: String, @Field("eventDetId") eventDetId: Int) : Call<APIResponse>
+    fun checkCoupon(@Field("barcode") barcode: String, @Field("eventDetId") eventDetId: Int, @Field("registrationId") registrationId : Int, @Field("entryBy") entryBy : Int) : Call<APIResponse>
 
 
     // get cadet details
     @FormUrlEncoded
     @POST("cadet_details.php")
-    fun getCadetDetails(@Field("barcode") barcode: String)
+    fun getCadetDetails(@Field("barcode") barcode: String) : Call<APIResponse>
 
 
     // load other events
     @FormUrlEncoded
     @POST("load_events.php")
-    fun loadEvents(@Field("submit") submit : String)
+    fun loadEvents(@Field("submit") submit : String) : Call<APIResponse>
+
+    @FormUrlEncoded
+    @POST("cadet_parking.php")
+    fun getCadetParking(@Field("barcode") barcode: String) : Call<APIResponse>
 
 }

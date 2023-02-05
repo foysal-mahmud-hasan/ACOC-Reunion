@@ -1,6 +1,6 @@
 package com.wst.acocscanner.model
 
-class EventId {
+class EventDetId {
 
     var eventId : Int = 0
     var subEventTitle : String = ""

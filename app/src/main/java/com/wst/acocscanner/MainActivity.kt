@@ -69,7 +69,6 @@ class MainActivity : AppCompatActivity() {
                         binding.contentLayout.visibility = View.VISIBLE
                     } else{
 //                        val intent = Intent(this@MainActivity, HomeActivity::class.java)
-
                         //saving id to shared prefs
 //                        val sharedPref = this@MainActivity.getSharedPreferences("com.wst.acocscanner", Context.MODE_PRIVATE)
 //                        val editor = sharedPref.edit()
@@ -77,7 +76,6 @@ class MainActivity : AppCompatActivity() {
 //                        editor.commit()
 //                        val token = sharedPref.getInt("Id", 0)
 //                        Log.d("token", "$token")
-
                         onSuccessLogin(response)
 //                        Toast.makeText(this@MainActivity, "Register Successful"
 //                                + response.body()!!.uid, Toast.LENGTH_LONG).show()

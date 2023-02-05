@@ -45,6 +45,9 @@
         <action
             android:id="@+id/action_cadetDetailsFragment_to_registrationFragment"
             app:popUpTo="@id/registrationFragment" />
+        <argument
+            android:name="barcode"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/otherEventsFragment"

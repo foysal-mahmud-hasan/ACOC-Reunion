@@ -10,25 +10,25 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.wst.acocscanner.R
+import com.wst.acocscanner.api.IMyApi
+import com.wst.acocscanner.commonURL.Common
 import com.wst.acocscanner.databinding.FragmentOtherEventsBinding
 import com.wst.acocscanner.registration.RegistrationFragmentDirections
+import com.wst.acocscanner.retrofitClient.APIResponse
+import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [OtherEventsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class OtherEventsFragment : Fragment() {
 
     private lateinit var binding: FragmentOtherEventsBinding
+    private lateinit var mService : IMyApi
+    private lateinit var oeViewModel: OtherEventsViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -39,18 +39,52 @@ class OtherEventsFragment : Fragment() {
     ): View? {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_other_events, container, false)
-        val options = arrayOf("Option 1", "Option 2", "Option 3")
+        oeViewModel = ViewModelProvider(this, OtherEventsViewModelFactory(requireActivity().application)).get(OtherEventsViewModel::class.java)
+        binding.oeViewModel = oeViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
-        val spinner = binding.spinner
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, options)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner.adapter = adapter
-        binding.OEBackBtn.setOnClickListener {view: View ->
-            showSuccessAlertDialog()
-        }
+
+        mService = Common.api
+
+
+
+        mService.loadEvents("submit").enqueue(object : Callback<APIResponse> {
+            override fun onResponse(call: Call<APIResponse>, response: Response<APIResponse>) {
+                if (response.body()!!.error) {
+                    showWarningAlertDialog(response)
+                } else {
+                    val events = response.body()!!.eventDetId
+                    if (events != null && events.isNotEmpty()) {
+                        val options = events.map { it.subEventTitle}
+                        val spinner = binding.spinner
+                        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, options)
+                        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                        spinner.adapter = adapter
+                    }
+                }
+
+            }
+
+            override fun onFailure(call: Call<APIResponse>, t: Throwable) {
+                // Handle failure of the API call
+            }
+        })
+
+
+        oeViewModel.navigateToHomeFragment.observe(viewLifecycleOwner, Observer {
+            if (it == true){
+                findNavController().navigate(OtherEventsFragmentDirections.actionOtherEventsFragmentToHomeFragment())
+                oeViewModel.doneNavigateToHome()
+            }
+        })
 
         return binding.root
     }
+
+    private fun showWarningAlertDialog(response: Response<APIResponse>) {
+
+    }
+
     private fun showSuccessAlertDialog() {
         val builder = AlertDialog.Builder(requireContext(), R.style.AlertDialogTheme)
         val view = LayoutInflater.from(requireContext()).inflate(
