@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.airbnb.lottie.LottieAnimationView
 import com.wst.acocscanner.R
 import com.wst.acocscanner.databinding.FragmentHomeBinding
 
@@ -18,6 +19,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var homeViewModel: HomeViewModel
+    private lateinit var loadingAnimation: LottieAnimationView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -34,6 +36,8 @@ class HomeFragment : Fragment() {
 
         binding.lifecycleOwner = viewLifecycleOwner
 
+        loadingAnimation = binding.loadingAnimation
+
 
         homeViewModel.navigateToRegistrationScanner.observe(viewLifecycleOwner, Observer {
             if (it == true){
@@ -44,6 +48,9 @@ class HomeFragment : Fragment() {
 
         homeViewModel.navigateToOEScanner.observe(viewLifecycleOwner, Observer {
             if(it == true){
+                binding.contentLayout.visibility = View.GONE
+                loadingAnimation.visibility = View.VISIBLE
+                loadingAnimation.playAnimation()
                 findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToOtherEventsFragment())
                 homeViewModel.doneNavigateToOEScanner()
             }

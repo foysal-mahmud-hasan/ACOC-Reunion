@@ -52,7 +52,7 @@
     <fragment
         android:id="@+id/otherEventsFragment"
         android:name="com.wst.acocscanner.otherEvents.OtherEventsFragment"
-        android:label="OtherEventsFragment"
+        android:label="Other Events"
         tools:layout="@layout/fragment_other_events">
         <action
             android:id="@+id/action_otherEventsFragment_to_homeFragment"

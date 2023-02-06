@@ -12,6 +12,6 @@ class APIResponse {
     var events : List<Event>? = null
     var registrationIdForOE : RegistrationIdForOE? = null
     var parkings : List<Parking>? = null
-    var eventDetId : List<EventDetId>? = null
+    var eventList : List<EventList>? = null
 }
 

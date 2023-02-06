@@ -22,6 +22,10 @@ interface IMyApi {
     @POST("validation.php")
     fun validateQrCode(@Field("barcode") barcode : String) : Call<APIResponse>
 
+    @FormUrlEncoded
+    @POST("validation_other_events.php")
+    fun validateQrCodeOE(@Field("barcode") barcode : String) : Call<APIResponse>
+
 
     // check barcode register
     @FormUrlEncoded
@@ -33,6 +37,12 @@ interface IMyApi {
     @FormUrlEncoded
     @POST("cadet_details.php")
     fun getCadetDetails(@Field("barcode") barcode: String) : Call<APIResponse>
+
+    //check for scanned in regi or not
+    @FormUrlEncoded
+    @POST("check_if_registered_for_first.php")
+    fun checkCouponFirst(@Field("barcode") barcode: String, @Field("eventDetId") eventDetId: Int) : Call<APIResponse>
+
 
 
     // load other events

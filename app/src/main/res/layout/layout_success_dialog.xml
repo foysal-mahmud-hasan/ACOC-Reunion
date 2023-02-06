@@ -42,10 +42,11 @@
             android:id="@+id/textMessageSuccess"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
+            android:gravity="center"
             android:layout_marginTop="18dp"
             android:layout_marginBottom="40dp"
             android:textColor="@color/black"
-            android:textSize="16sp"
+            android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textTitleSuccess"/>
         

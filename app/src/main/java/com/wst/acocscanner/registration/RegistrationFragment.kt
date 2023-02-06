@@ -165,7 +165,7 @@ class RegistrationFragment : Fragment() {
                         showWarningAlertDialog(response)
                     }else{
                         Log.d("TAG", "REGISTRATION ID ${response!!.body()!!.registrationdetails!!.registrationId}")
-                        mService.checkCoupon(barcode, 7, response!!.body()!!.registrationdetails!!.registrationId, userId).enqueue(object : retrofit2.Callback<APIResponse>{
+                        mService.checkCoupon(barcode, 1, response!!.body()!!.registrationdetails!!.registrationId, userId).enqueue(object : retrofit2.Callback<APIResponse>{
                             override fun onResponse(call: Call<APIResponse>, response1: Response<APIResponse>) {
                                 if (response1.body()!!.error){
                                     loadingAnimation.visibility = View.GONE
@@ -177,10 +177,10 @@ class RegistrationFragment : Fragment() {
                                     loadingAnimation.cancelAnimation()
                                     binding.contentLayout.visibility = View.VISIBLE
                                     if (response!!.body()!!.registrationdetails!!.isCadet == 1){
-                                        Toast.makeText(requireContext(), "Successfully Registered", Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(requireContext(), "Scanned Successfully", Toast.LENGTH_LONG).show()
                                         findNavController().navigate(RegistrationFragmentDirections.actionRegistrationFragmentToCadetDetailsFragment(barcode))
                                     } else{
-                                        showSuccessAlertDialog(response)
+                                        showSuccessAlertDialog(response1)
                                     }
                                 } else{
                                     loadingAnimation.visibility = View.GONE
@@ -246,7 +246,7 @@ class RegistrationFragment : Fragment() {
         )
         builder.setView(view)
         (view.findViewById<View>(R.id.textTitleSuccess) as TextView).text = "Success"
-        (view.findViewById<View>(R.id.textMessageSuccess) as TextView).text = "This Qr Code Successfully Registered For registration id ${response!!.body()!!.registrationdetails!!.registrationId}"
+        (view.findViewById<View>(R.id.textMessageSuccess) as TextView).text = "Scanned Successfully"
         (view.findViewById<View>(R.id.buttonActionSuccess) as Button).text = "Scan Again"
         (view.findViewById<View>(R.id.imageIconSuccess) as ImageView).setImageResource(R.drawable.done)
         val alertDialog = builder.create()
@@ -295,7 +295,7 @@ class RegistrationFragment : Fragment() {
         )
         builder.setView(view)
         (view.findViewById<View>(R.id.textTitleWarning) as TextView).text = "Warning"
-        (view.findViewById<View>(R.id.textMessageWarning) as TextView).text = "This coupon already scanned for This event. Entry Id ${response.body()!!.event!!.eventId}"
+        (view.findViewById<View>(R.id.textMessageWarning) as TextView).text = "This coupon already scanned for Registration event"
         (view.findViewById<View>(R.id.buttonActionWarning) as Button).text = "Scan Again"
         (view.findViewById<View>(R.id.imageIconWarning) as ImageView).setImageResource(R.drawable.done)
         val alertDialog = builder.create()
