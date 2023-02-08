@@ -164,9 +164,9 @@ class RegistrationFragment : Fragment() {
                         binding.contentLayout.visibility = View.VISIBLE
                         showWarningAlertDialog(response)
                     }else{
-                        Log.d("TAG", "REGISTRATION ID ${response!!.body()!!.registrationdetails!!.registrationId}")
+//                        Log.d("TAG", "REGISTRATION ID ${response!!.body()!!.registrationdetails!!.registrationId}")
                         mService.checkCoupon(barcode, 1, response!!.body()!!.registrationdetails!!.registrationId, userId).enqueue(object : retrofit2.Callback<APIResponse>{
-                            override fun onResponse(call: Call<APIResponse>, response1: Response<APIResponse>) {
+                            override fun onResponse(call1: Call<APIResponse>, response1: Response<APIResponse>) {
                                 if (response1.body()!!.error){
                                     loadingAnimation.visibility = View.GONE
                                     loadingAnimation.cancelAnimation()
@@ -180,7 +180,31 @@ class RegistrationFragment : Fragment() {
                                         Toast.makeText(requireContext(), "Scanned Successfully", Toast.LENGTH_LONG).show()
                                         findNavController().navigate(RegistrationFragmentDirections.actionRegistrationFragmentToCadetDetailsFragment(barcode))
                                     } else{
-                                        showSuccessAlertDialog(response1)
+                                        mService.checkRelation(barcode).enqueue(object : retrofit2.Callback<APIResponse>{
+                                            override fun onResponse(call2: Call<APIResponse>, response2: Response<APIResponse>
+                                            ) {
+                                                if(response.body()!!.error){
+                                                    loadingAnimation.visibility = View.GONE
+                                                    loadingAnimation.cancelAnimation()
+                                                    binding.contentLayout.visibility = View.VISIBLE
+                                                    showWarningAlertDialog(response2)
+                                                }else{
+                                                    loadingAnimation.visibility = View.GONE
+                                                    loadingAnimation.cancelAnimation()
+                                                    binding.contentLayout.visibility = View.VISIBLE
+                                                    showSuccessAlertDialog(response2)
+                                                }
+                                            }
+
+                                            override fun onFailure(call2: Call<APIResponse>, t2: Throwable
+                                            ) {
+                                                loadingAnimation.visibility = View.GONE
+                                                loadingAnimation.cancelAnimation()
+                                                binding.contentLayout.visibility = View.VISIBLE
+//                                Log.d("TAG", "I WAS CALLED NESTED API CALL")
+                                                showErrorAlertDialog(call2, t2)
+                                            }
+                                        })
                                     }
                                 } else{
                                     loadingAnimation.visibility = View.GONE
@@ -193,7 +217,7 @@ class RegistrationFragment : Fragment() {
                                 loadingAnimation.visibility = View.GONE
                                 loadingAnimation.cancelAnimation()
                                 binding.contentLayout.visibility = View.VISIBLE
-                                Log.d("TAG", "I WAS CALLED NESTED API CALL")
+//                                Log.d("TAG", "I WAS CALLED NESTED API CALL")
                                 showErrorAlertDialog(call1, t1)
                             }
                         })
@@ -203,7 +227,7 @@ class RegistrationFragment : Fragment() {
                     loadingAnimation.visibility = View.GONE
                     loadingAnimation.cancelAnimation()
                     binding.contentLayout.visibility = View.VISIBLE
-                    Log.d("TAG", "I WAS CALLED MAIN API CALL")
+//                    Log.d("TAG", "I WAS CALLED MAIN API CALL")
                     showErrorAlertDialog(call, t)
                 }
             })
@@ -246,7 +270,7 @@ class RegistrationFragment : Fragment() {
         )
         builder.setView(view)
         (view.findViewById<View>(R.id.textTitleSuccess) as TextView).text = "Success"
-        (view.findViewById<View>(R.id.textMessageSuccess) as TextView).text = "Scanned Successfully"
+        (view.findViewById<View>(R.id.textMessageSuccess) as TextView).text = "Coupon scanned successfully for ${response.body()!!.relation!!.relationWithCadet} of Cadet No- ${response.body()!!.relation!!.cadetNo}"
         (view.findViewById<View>(R.id.buttonActionSuccess) as Button).text = "Scan Again"
         (view.findViewById<View>(R.id.imageIconSuccess) as ImageView).setImageResource(R.drawable.done)
         val alertDialog = builder.create()

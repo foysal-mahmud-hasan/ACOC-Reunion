@@ -27,7 +27,7 @@ interface IMyApi {
     fun validateQrCodeOE(@Field("barcode") barcode : String) : Call<APIResponse>
 
 
-    // check barcode register
+    // check barcode for register
     @FormUrlEncoded
     @POST("check_coupon.php")
     fun checkCoupon(@Field("barcode") barcode: String, @Field("eventDetId") eventDetId: Int, @Field("registrationId") registrationId : Int, @Field("entryBy") entryBy : Int) : Call<APIResponse>
@@ -53,5 +53,10 @@ interface IMyApi {
     @FormUrlEncoded
     @POST("cadet_parking.php")
     fun getCadetParking(@Field("barcode") barcode: String) : Call<APIResponse>
+
+    //check Relation
+    @FormUrlEncoded
+    @POST("check_relation.php")
+    fun checkRelation(@Field("barcode") barcode: String) : Call<APIResponse>
 
 }
